@@ -1,0 +1,38 @@
+CloudSync — Error Codes & Troubleshooting
+
+401 Unauthorized
+Your API key is missing, invalid, or has been revoked. Check that the
+`CLOUDSYNC_API_KEY` environment variable is set correctly, and confirm the key
+hasn't been revoked in Settings > API Keys.
+
+403 Forbidden — WORKSPACE_ACCESS_DENIED
+The authenticated API key does not have access to the requested workspace. This
+usually happens when a key from one workspace is used to call an endpoint for a
+different workspace. Generate a new key scoped to the correct workspace.
+
+404 Not Found — SYNC_JOB_NOT_FOUND
+The `sync_id` provided does not exist or has expired. Sync job records are retained
+for 30 days after completion; older jobs return this error.
+
+409 Conflict — SYNC_CONFLICT
+Occurs when the same file was modified both locally and on the server since the
+last sync. Resolve by running `cloudsync resolve --strategy=local` or
+`--strategy=remote` to pick which version wins, or `--strategy=merge` for text files.
+
+413 Payload Too Large
+A single file exceeds the 5GB per-file upload limit. Split large files or use the
+CloudSync Large File API (Enterprise tier only).
+
+429 Too Many Requests
+You have exceeded your tier's rate limit. Check the `Retry-After` header and back
+off accordingly. Upgrading to Pro increases the limit from 60 to 600 requests/minute.
+
+500 Internal Server Error
+An unexpected server-side failure. These are automatically logged and monitored;
+if the error persists for more than a few minutes, check status.cloudsync.example.com
+for an ongoing incident before contacting support.
+
+CLI error: "command not found: cloudsync"
+The CLI was not installed correctly or is not on your PATH. Reinstall with
+`pip install --upgrade cloudsync-cli` and ensure your Python Scripts directory is
+in your system PATH.

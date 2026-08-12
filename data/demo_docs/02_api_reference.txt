@@ -1,0 +1,38 @@
+CloudSync — API Reference (v2)
+
+Base URL: https://api.cloudsync.example.com/v2
+
+Authentication
+All requests require an `Authorization: Bearer <API_KEY>` header. Requests without
+a valid key return a 401 Unauthorized response.
+
+Endpoints
+
+POST /sync/push
+Uploads local files to a workspace. Body: multipart/form-data with a `files[]` field
+and a `workspace_id` field. Returns a `sync_id` and per-file status.
+
+POST /sync/pull
+Downloads the latest version of files for a workspace. Query params: `workspace_id`,
+optional `since` (ISO 8601 timestamp) to fetch only files changed after that time.
+
+GET /sync/status/{sync_id}
+Returns the status of a sync job: `pending`, `in_progress`, `completed`, or `failed`.
+Includes a `progress_percent` field while `in_progress`.
+
+GET /workspaces
+Lists all workspaces the authenticated API key has access to, including storage
+usage and member count for each.
+
+DELETE /workspaces/{workspace_id}/files/{file_id}
+Permanently deletes a file from the workspace. This action cannot be undone and does
+not go through the trash/recovery flow.
+
+Rate limits
+Free tier: 60 requests/minute. Pro tier: 600 requests/minute. Exceeding the limit
+returns a 429 status with a `Retry-After` header indicating seconds to wait.
+
+Webhooks
+Configure a webhook URL in Settings > Webhooks to receive POST notifications on
+`sync.completed`, `sync.failed`, and `file.deleted` events. Payloads are signed with
+an HMAC-SHA256 signature in the `X-CloudSync-Signature` header.

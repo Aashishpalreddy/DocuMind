@@ -1,0 +1,34 @@
+CloudSync — Billing & Plans FAQ
+
+What plans are available?
+Free: 5GB storage, 1,000 API calls/month, 1 member — no credit card required.
+Pro: $12/month, 100GB storage, 50,000 API calls/month, up to 10 workspace members.
+Enterprise: custom pricing, custom storage/call limits, SSO, dedicated support.
+
+How do I upgrade or downgrade my plan?
+Go to Settings > Billing > Change Plan. Upgrades take effect immediately and you're
+charged a prorated amount for the rest of the billing cycle. Downgrades take effect
+at the start of the next billing cycle.
+
+What happens if I exceed my storage limit?
+On the Free tier, uploads are blocked once you hit 5GB until you delete files or
+upgrade. Pro and Enterprise tiers allow temporary overages billed at $0.10/GB, with
+an email warning at 90% usage.
+
+Can I cancel anytime?
+Yes. Cancel from Settings > Billing > Cancel Subscription. You keep access until the
+end of the current billing period, after which your workspace reverts to the Free
+tier limits (data is not deleted, but new uploads are blocked if over 5GB).
+
+Do you offer refunds?
+Refunds are issued for accidental charges within 14 days of the charge date. Contact
+support with your invoice ID to request one. Refunds are not issued for partial
+months after voluntary downgrades or cancellations.
+
+Is there a student or nonprofit discount?
+Yes, 50% off Pro tier for verified students and registered nonprofits. Apply at
+cloudsync.example.com/discounts with proof of eligibility.
+
+How is API usage counted toward my monthly limit?
+Every call to `/sync/push`, `/sync/pull`, `/sync/status`, and `/workspaces` counts
+as one API call. Webhook deliveries do not count against your limit.

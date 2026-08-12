@@ -1,0 +1,31 @@
+CloudSync — Getting Started Guide
+
+CloudSync is a file synchronization and backup API for developers. This guide covers
+installation, authentication, and your first sync job.
+
+1. Creating an account
+Sign up at cloudsync.example.com with your email. Free tier accounts include 5GB of
+storage and 1,000 API calls per month. No credit card is required for the free tier.
+
+2. Installing the CLI
+Install the CloudSync CLI via pip: `pip install cloudsync-cli`. The CLI requires
+Python 3.9 or later. Verify installation with `cloudsync --version`.
+
+3. Authentication
+After signup, generate an API key from Settings > API Keys in the dashboard. Set it
+as an environment variable: `export CLOUDSYNC_API_KEY=your_key_here`. API keys are
+scoped to a single workspace and can be revoked at any time from the dashboard.
+
+4. Creating your first sync job
+Run `cloudsync init` in the directory you want to sync, then `cloudsync push` to
+upload files. Use `cloudsync pull` to download the latest version from the server.
+Sync jobs run incrementally — only changed files are transferred after the first run.
+
+5. Configuring sync rules
+A `.cloudsyncignore` file in your project root works like `.gitignore` — list file
+patterns to exclude from sync (e.g. `node_modules/`, `*.log`, `.env`).
+
+6. Workspace limits
+Free tier: 5GB storage, 1,000 API calls/month, 1 workspace member.
+Pro tier ($12/month): 100GB storage, 50,000 API calls/month, up to 10 members.
+Enterprise: custom storage and call limits, SSO support, dedicated support channel.
