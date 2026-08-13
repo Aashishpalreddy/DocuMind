@@ -10,7 +10,7 @@ in the actual documentation, with the source cited — and a live faithfulness s
 so you can tell whether the answer is actually trustworthy or hallucinated, without
 a human having to double-check it. No ticket, no wait.
 
-Live demo: _add your Streamlit Community Cloud URL here after first deploy_
+**Live demo: [documind-h6vwhc9aqppeamhpheg4sq.streamlit.app](https://documind-h6vwhc9aqppeamhpheg4sq.streamlit.app/)**
 
 ## How it works
 
