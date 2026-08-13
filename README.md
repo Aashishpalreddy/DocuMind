@@ -10,7 +10,7 @@ in the actual documentation, with the source cited — and a live faithfulness s
 so you can tell whether the answer is actually trustworthy or hallucinated, without
 a human having to double-check it. No ticket, no wait.
 
-Live demo: _add your Hugging Face Space URL here after first deploy_
+Live demo: _add your Streamlit Community Cloud URL here after first deploy_
 
 ## How it works
 
@@ -37,6 +37,11 @@ files (nothing is persisted server-side).
 Python · Streamlit · LangChain · Groq (Llama 3.1) · sentence-transformers · FAISS ·
 Docker · GitHub Actions
 
+A `Dockerfile` is included and buildable locally (`docker build .`) to demonstrate
+containerization, but the live deployment below uses Streamlit Community Cloud
+directly rather than the Docker image, since Hugging Face Spaces now requires a
+paid plan for Docker/Gradio SDKs (Static Spaces are the only free tier there).
+
 Total cost: **$0**. No paid APIs, no paid hosting.
 
 ## Running locally
@@ -56,17 +61,18 @@ streamlit run app/app.py
 pytest tests/ -v
 ```
 
-## Deployment (Hugging Face Spaces, free)
+## Deployment (Streamlit Community Cloud, free)
 
-1. Create a free Space at huggingface.co/new-space with the **Docker** SDK.
-2. Add three GitHub repo secrets (Settings > Secrets and variables > Actions):
-   - `HF_TOKEN` — a Hugging Face access token with write access
-   - `HF_USERNAME` — your Hugging Face username
-   - `HF_SPACE_NAME` — the Space name you created
-3. Add `GROQ_API_KEY` as a secret in the Space itself (Settings > Repository
-   secrets on huggingface.co), not in GitHub.
-4. Push to `main` — GitHub Actions runs tests, then force-pushes to the Space,
-   which rebuilds the Docker container automatically.
+1. Go to share.streamlit.io and sign in with GitHub.
+2. Click "New app", select the `Aashishpalreddy/DocuMind` repo, branch `main`,
+   main file path `app/app.py`.
+3. In "Advanced settings" before deploying, add a secret:
+   ```
+   GROQ_API_KEY = "your_groq_api_key_here"
+   ```
+4. Deploy. Every push to `main` auto-redeploys (Streamlit Cloud watches the repo
+   directly — no GitHub Actions step needed for this part; the `CI` workflow just
+   runs lint/tests on every push and PR).
 
 ## Project structure
 
